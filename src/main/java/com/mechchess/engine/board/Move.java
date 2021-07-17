@@ -18,7 +18,7 @@ public abstract class Move {
     }
 
     public static final class PieceMove extends Move {
-        public PieceMove(final Board board,final Piece piece,final int destinationCoordinate) {
+        public PieceMove(final Board board, final Piece piece, final int destinationCoordinate) {
             super(board, piece, destinationCoordinate);
         }
     }
@@ -26,7 +26,7 @@ public abstract class Move {
     public static final class PieceAttack extends Move {
         final Piece targetPiece;
 
-        public PieceAttack(final Board board,final Piece piece,final int destinationCoordinate,final Piece targetPiece) {
+        public PieceAttack(final Board board, final Piece piece, final int destinationCoordinate, final Piece targetPiece) {
             super(board, piece, destinationCoordinate);
             this.targetPiece = targetPiece;
         }

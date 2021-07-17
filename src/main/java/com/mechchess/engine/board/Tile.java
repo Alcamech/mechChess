@@ -1,6 +1,5 @@
 package com.mechchess.engine.board;
 
-import com.google.common.collect.ImmutableMap;
 import com.mechchess.engine.piece.Piece;
 
 import java.util.Collections;
@@ -20,7 +19,7 @@ public abstract class Tile {
     private static Map<Integer, EmptyTile> createValidEmptyTiles() {
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
 
-        for (int i =0; i < BoardUtils.TOTAL_NUM_TILES; i++) {
+        for (int i = 0; i < BoardUtils.TOTAL_NUM_TILES; i++) {
             emptyTileMap.put(i, new EmptyTile(i));
         }
 
@@ -37,11 +36,12 @@ public abstract class Tile {
     }
 
     public abstract boolean isTileOccupied();
+
     public abstract Piece getPiece();
 
     /**
-     *  Subclass representing the state of an
-     *  empty tile. Can be instantiated.
+     * Subclass representing the state of an
+     * empty tile. Can be instantiated.
      */
     public static final class EmptyTile extends Tile {
         private EmptyTile(final int coordinate) {
@@ -50,7 +50,7 @@ public abstract class Tile {
 
         @Override
         public boolean isTileOccupied() {
-            return false;
+            return true;
         }
 
         @Override
@@ -60,21 +60,21 @@ public abstract class Tile {
     }
 
     /**
-     *  Subclass representing the state of an
-     *  occupied tile. Can be instantiated.
+     * Subclass representing the state of an
+     * occupied tile. Can be instantiated.
      */
     public static final class OccupiedTile extends Tile {
         // piece can not be referenced outside of OccupiedTile
         private final Piece piece;
 
-        private OccupiedTile(final int coordinate,final Piece piece) {
+        private OccupiedTile(final int coordinate, final Piece piece) {
             super(coordinate);
             this.piece = piece;
         }
 
         @Override
         public boolean isTileOccupied() {
-            return true;
+            return false;
         }
 
         @Override

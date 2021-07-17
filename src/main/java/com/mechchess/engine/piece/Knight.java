@@ -13,9 +13,9 @@ import java.util.Set;
 /**
  * Class representing the Knight chess piece.
  */
-public class Knight extends Piece{
+public class Knight extends Piece {
 
-    private final static int[] POSSIBLE_MOVE_OFFSETS = {-17,-15,-10,-6,6,10,15,17};
+    private final static int[] POSSIBLE_MOVE_OFFSETS = {-17, -15, -10, -6, 6, 10, 15, 17};
 
     Knight(int piecePosition, Side pieceSide) {
         super(piecePosition, pieceSide);
@@ -25,27 +25,27 @@ public class Knight extends Piece{
     public Set<Move> calculateLegalMoves(final Board board) {
         Set<Move> legalMoves = new HashSet<>();
 
-        for(final int currentOffset: POSSIBLE_MOVE_OFFSETS) {
+        for (final int currentOffset : POSSIBLE_MOVE_OFFSETS) {
             final int possibleDestinationCoordinate = this.piecePosition + currentOffset;
 
-            if(BoardUtils.isValidTileCoordinate(possibleDestinationCoordinate)) {
+            if (BoardUtils.isValidTileCoordinate(possibleDestinationCoordinate)) {
                 final Tile possibleDestinationTile = board.getTile(possibleDestinationCoordinate);
 
-                if(isFirstColumnExclusion(this.piecePosition,currentOffset) ||
-                   isSecondColumnExclusion(this.piecePosition,currentOffset) ||
-                   isSeventhColumnExclusion(this.piecePosition,currentOffset) ||
-                   isEighthColumnExclusion(this.piecePosition,currentOffset)) {
+                if (isFirstColumnExclusion(this.piecePosition, currentOffset) ||
+                        isSecondColumnExclusion(this.piecePosition, currentOffset) ||
+                        isSeventhColumnExclusion(this.piecePosition, currentOffset) ||
+                        isEighthColumnExclusion(this.piecePosition, currentOffset)) {
                     continue;
                 }
 
-                if(!possibleDestinationTile.isTileOccupied()) {
-                    legalMoves.add(new Move.PieceMove(board,this,possibleDestinationCoordinate)); // non attack move
+                if (possibleDestinationTile.isTileOccupied()) {
+                    legalMoves.add(new Move.PieceMove(board, this, possibleDestinationCoordinate)); // non attack move
                 } else { // is tile occupied by an enemy piece?
                     final Piece pieceAtDestination = possibleDestinationTile.getPiece();
                     final Side pieceSide = pieceAtDestination.getPieceSide();
 
-                    if(this.pieceSide != pieceSide) {
-                        legalMoves.add(new Move.PieceAttack(board,this,possibleDestinationCoordinate,pieceAtDestination)); // attack move
+                    if (this.pieceSide != pieceSide) {
+                        legalMoves.add(new Move.PieceAttack(board, this, possibleDestinationCoordinate, pieceAtDestination)); // attack move
                     }
                 }
             }
