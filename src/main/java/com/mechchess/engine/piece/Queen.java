@@ -10,14 +10,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Class representing the Knight chess piece.
- */
-public class Knight extends Piece {
+public class Queen extends Piece{
 
-    private final static int[] POSSIBLE_MOVE_OFFSETS = {-17, -15, -10, -6, 6, 10, 15, 17};
+    private final static int[] POSSIBLE_MOVE_OFFSETS = {-9, -7, -8, -1, 1, 7, 8, 9};
 
-    Knight(int piecePosition, Side pieceSide) {
+    Queen(int piecePosition, Side pieceSide) {
         super(piecePosition, pieceSide);
     }
 
@@ -32,8 +29,6 @@ public class Knight extends Piece {
                 final Tile possibleDestinationTile = board.getTile(possibleDestinationCoordinate);
 
                 if (isFirstColumnExclusion(this.piecePosition, currentOffset) ||
-                        isSecondColumnExclusion(this.piecePosition, currentOffset) ||
-                        isSeventhColumnExclusion(this.piecePosition, currentOffset) ||
                         isEighthColumnExclusion(this.piecePosition, currentOffset)) {
                     continue;
                 }
@@ -57,21 +52,10 @@ public class Knight extends Piece {
     // edge cases for POSSIBLE_MOVE_OFFSETS where the traditional offsets for calculating a move position
     // do not work.
     private static boolean isFirstColumnExclusion(final int currentPosition, final int possibleOffset) {
-        return BoardUtils.FIRST_COLUMN[currentPosition] && ((possibleOffset == -17) || (possibleOffset == -10) ||
-                (possibleOffset == 6) || (possibleOffset == 15));
-    }
-
-    private static boolean isSecondColumnExclusion(final int currentPositon, final int possibleOffset) {
-        return BoardUtils.SECOND_COLUMN[currentPositon] && ((possibleOffset == -10) || (possibleOffset == 6));
-    }
-
-    private static boolean isSeventhColumnExclusion(final int currentPosition, final int possibleOffset) {
-        return BoardUtils.SEVENTH_COLUMN[currentPosition] && ((possibleOffset == -6) || (possibleOffset == 10));
+        return BoardUtils.FIRST_COLUMN[currentPosition] && (possibleOffset == -1 || possibleOffset == -9 || possibleOffset == 7);
     }
 
     private static boolean isEighthColumnExclusion(final int currentPosition, final int possibleOffset) {
-        return BoardUtils.EIGHTH_COLUMN[currentPosition] && ((possibleOffset == -15) || (possibleOffset == -6) ||
-                (possibleOffset == 10) || (possibleOffset == 17));
+        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (possibleOffset == 1 || possibleOffset == 9 || possibleOffset == -7);
     }
-
 }

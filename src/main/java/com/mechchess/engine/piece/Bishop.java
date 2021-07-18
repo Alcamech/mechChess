@@ -1,12 +1,12 @@
 package com.mechchess.engine.piece;
 
-import com.google.common.collect.ImmutableSet;
 import com.mechchess.engine.Side;
 import com.mechchess.engine.board.Board;
 import com.mechchess.engine.board.BoardUtils;
 import com.mechchess.engine.board.Move;
 import com.mechchess.engine.board.Tile;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +22,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public Set<Move> calculateLegalMoves(Board board) {
+    public Set<Move> calculateLegalMoves(final Board board) {
         final Set<Move> legalMoves = new HashSet<>();
 
         for (final int currentOffset : POSSIBLE_MOVE_OFFSETS) {
@@ -54,7 +54,7 @@ public class Bishop extends Piece {
                 }
             }
         }
-        return ImmutableSet.copyOf(legalMoves);
+        return Collections.unmodifiableSet(legalMoves);
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition, final int possibleOffset) {
